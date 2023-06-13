@@ -1,0 +1,50 @@
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  margin: 0;
+  padding: 0;
+}
+
+.editor, .cm-editor, .cm-gutter {
+  font-size: 14px;
+  background-color: darken($color: #282c34, $amount: 10);
+}
+
+:root {
+  --bg-color: #282c34;
+}
+
+.wmde-markdown {
+  padding: 10px !important;
+  font-size: 12px !important;
+  background-color: darken($color: #282c34, $amount: 10) !important;
+}
+
+body,
+.mantine-AppShell-root,
+.mantine-Header-root,
+.mantine-Navbar-root {
+  background-color: lighten($color: #282c34, $amount: 5);
+  color: white;
+  border-color: lighten($color: #282c34, $amount: 20);
+  
+  .MuiStack-root {
+    gap: 10px;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.mantine-Header-root {
+  padding: 10px 20px 10px;
+}
+
+.mantine-Navbar-root {
+  padding: 20px;
+}

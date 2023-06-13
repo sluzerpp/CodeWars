@@ -1,0 +1,12 @@
+.cm-editor {
+  .cm-scroller {
+    overflow: hidden;
+    display: grid !important;
+    overflow-y: auto;
+    grid-template-columns: auto 1fr !important;
+  }
+
+  .cm-content {
+    white-space: pre-wrap;
+  }
+}

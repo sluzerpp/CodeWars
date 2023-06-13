@@ -1,0 +1,18 @@
+.btn {
+  appearance: none;
+  background: none;
+  outline: transparent;
+  border: none;
+  border-radius: 5px;
+  background-color: #88888850;
+  color: white;
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  &.blue {
+    background-color: #001aff6c;
+  }
+}

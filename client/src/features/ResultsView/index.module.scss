@@ -1,0 +1,29 @@
+.result {
+  background-color: #121417;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  border: 1px solid white;
+
+  &.totalpassed, .totalpassed {
+    color: #0ec727 !important;
+    border-color: #0ec727 !important;
+
+    * {
+      color: #0ec727;
+      border-color: #0ec727;
+    }
+  }
+
+  &.totalfailed, .totalfailed {
+    color: darken($color: red, $amount: 10) !important;
+    border-color: darken($color: red, $amount: 10) !important;
+
+    * {
+      color: darken($color: red, $amount: 10);
+      border-color: darken($color: red, $amount: 10);
+    }
+  }
+
+ 
+}

@@ -1,0 +1,41 @@
+.grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+
+  .column {
+    display: grid;
+    gap: 10px;
+    align-items: start;
+  }
+}
+
+.input {
+  color: white !important;
+
+  * {
+    border-color: white !important;
+    color: white !important;
+  }
+}
+
+.green {
+  background-color: #0ec727;
+
+  &:hover {
+    background-color: darken($color: #0ec727, $amount: 4);
+  }
+}
+
+.red {
+  background-color: red;
+
+  &:hover {
+    background-color: darken($color: red, $amount: 4);
+  }
+}
+
+.line {
+  width: 100%;
+}
