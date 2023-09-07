@@ -8,8 +8,7 @@ const { CSHARP_DATA_PATH } = require('../../constants');
 
 class CSharpContainer extends Container {
   constructor(docker, number) {
-    super();
-    this.docker = docker;
+    super(docker);
     this.name = `csharp-container-${number}`;
     this.dirPath = path.resolve(CSHARP_DATA_PATH, this.name);
     this.codePath = path.resolve(this.dirPath, 'code');
@@ -17,42 +16,13 @@ class CSharpContainer extends Container {
     this.dataPath = path.resolve(this.dirPath, 'data');
   }
   
+  // TODO - Redo method
   createDirs() {
-    this._clearFiles();
-    try {
-      fs.mkdirSync(CSHARP_DATA_PATH);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(this.dirPath);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.codePath));
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.testPath));
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.dataPath));
-    } catch (error) {}
+    this._createDirs(CSHARP_DATA_PATH, this.dirPath, this.codePath, this.testPath, this.dataPath);
   }
 
   async createContainer() {
-    try {
-      this.container = await this.docker.createContainer({
-        Image: imageName,
-        name: this.name,
-        Tty: true,
-        Cmd: ['/bin/bash'],
-        HostConfig: {
-          Binds: [`${this.dataPath}:/data`]
-        },
-      });
-      console.log('Контейнер успешно создан!')
-    } catch (error) {
-      this.container = this.docker.getContainer(this.name)
-      await this.deleteContainer();
-      await this.createContainer();
-    }
+    this._createContainer(imageName, this.dataPath);
   }
 
   async getResult() {
@@ -104,17 +74,6 @@ class CSharpContainer extends Container {
       AttachStderr: true,
     });
     await this.createOnEndPromise(exec);
-  }
-
-  _clearFiles() {
-    try {
-      if (fs.existsSync(this.dirPath)) {
-        fs.rmSync(this.dirPath, { recursive: true });
-      }
-    } catch (error) {
-      return this._clearFiles();
-    }
-    console.log(`Директория ${this.name} успешно очищена!`);
   }
 
   _parseTestResult(json) {

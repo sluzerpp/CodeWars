@@ -8,8 +8,7 @@ const { JAVA_DATA_PATH } = require('../../constants');
 
 class JavaContainer extends Container {
   constructor(docker, number) {
-    super();
-    this.docker = docker;
+    super(docker);
     this.name = `java-container-${number}`;
     this.dirPath = path.resolve(JAVA_DATA_PATH, this.name);
     this.codePath = path.resolve(this.dirPath, 'code');
@@ -17,23 +16,9 @@ class JavaContainer extends Container {
     this.dataPath = path.resolve(this.dirPath, 'data');
   }
   
+  // TODO - Redo method
   createDirs() {
-    this._clearFiles();
-    try {
-      fs.mkdirSync(JAVA_DATA_PATH);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(this.dirPath);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.codePath));
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.testPath));
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.dataPath));
-    } catch (error) {}
+    this._createDirs(JAVA_DATA_PATH, this.dirPath, this.codePath, this.dataPath, this.testPath);
   }
 
   async _renameXML(className) {
@@ -51,22 +36,7 @@ class JavaContainer extends Container {
   }
 
   async createContainer() {
-    try {
-      this.container = await this.docker.createContainer({
-        Image: imageName,
-        name: this.name,
-        Tty: true,
-        Cmd: ['/bin/bash'],
-        HostConfig: {
-          Binds: [`${this.dataPath}:/data`]
-        },
-      });
-      console.log('Контейнер успешно создан!')
-    } catch (error) {
-      this.container = this.docker.getContainer(this.name)
-      await this.deleteContainer();
-      await this.createContainer();
-    }
+    this._createContainer(imageName, this.dataPath);
   }
 
   
@@ -182,17 +152,6 @@ class JavaContainer extends Container {
     await this.createOnEndPromise(exec);
   }
 
-  _clearFiles() {
-    try {
-      if (fs.existsSync(this.dirPath)) {
-        fs.rmSync(this.dirPath, { recursive: true });
-      }
-    } catch (error) {
-      return this._clearFiles();
-    }
-    console.log(`Директория ${this.name} успешно очищена!`);
-  }
-
   async testCode(code, test) {
     await this.startContainer();
     this.createDirs();
@@ -201,7 +160,7 @@ class JavaContainer extends Container {
     if (!className || !testClassName) {
       this._clearFiles();
       await this.stopContainer();
-      return { error: 'Missing classname!' };
+      return { error: 'Missing class name!' };
     }
     await this._codeToContainer(code, className);
     await this._testToContainer(test, className);

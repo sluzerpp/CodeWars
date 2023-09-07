@@ -1,12 +1,8 @@
-import { EditorMarkdown } from '@/shared/ui/EditorMarkdown';
 import { Button, Group, Stack, Title } from '@mantine/core';
-import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useState } from 'react';
 import styles from './index.module.scss';
 import { EditorMap } from '@/app/Maps';
-import { LANGUAGES } from '@/shared/enums';
 import CodeMirrorEditor from '@/shared/ui/Editor';
-import { fetchTaskCode } from '@/app/api';
 
 interface CreateCodeProps {
   code: string;

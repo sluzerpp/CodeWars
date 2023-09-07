@@ -1,5 +1,9 @@
-import React from 'react';
+import ProfileWidget from '@/widgets/ProfileWidget';
 
 export default function ProfilePage() {
-  return <div>ProfilePage</div>;
+  return (
+    <div>
+      <ProfileWidget></ProfileWidget>
+    </div>
+  );
 }

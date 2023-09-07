@@ -2,7 +2,6 @@ const { MAX_CONTAINERS_COUNT } = require('../constants');
 
 class ContainerController {
   constructor(docker, ContainerClass) {
-    this.queue = [];
     this.freeContainers = [];
     this.busyContainers = [];
     this.ContainerClass = ContainerClass;
@@ -36,7 +35,6 @@ class ContainerController {
 
       const container = await getFreeContainer();
       this._useContainer(container);
-      console.log('here');
       const result = await container.testCode(code, test);
       console.log(result);
       this._freeContainer(container);

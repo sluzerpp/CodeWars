@@ -3,10 +3,10 @@ const router = new Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const disciplineController = require('../Controllers/disciplineController');
 
-router.post('/', disciplineController.create);
+router.post('/', authMiddleware(['ADMIN']), disciplineController.create);
 
 router.get('/', disciplineController.getAll);
 
-router.delete('/:id', disciplineController.delete);
+router.delete('/:id', authMiddleware(['ADMIN']), disciplineController.delete);
 
 module.exports = router;

@@ -17,7 +17,11 @@ class SolutionController {
     if (isNaN(id) || id < 0) {
       return next(ApiError.badRequest('Invalid id!'));
     }
-    const instances = await Solution.findAll({ where: { taskId: id } });
+    const { lang } = req.body;
+    if (!lang || !langController.check(lang)) {
+      return next(ApiError.badRequest('Invalid lang!'));
+    }
+    const instances = await Solution.findAll({ where: { taskId: id, lang } });
 
     res.json(instances);
   }
@@ -28,7 +32,7 @@ class SolutionController {
       return next(ApiError.badRequest('Invalid id!'));
     }
     const { lang } = req.body;
-    if (!lang || langController.check(lang)) {
+    if (!lang || !langController.check(lang)) {
       return next(ApiError.badRequest('Invalid lang!'));
     }
     const instance = await Solution.findOne({ where: { taskId: id, lang, userId: req.user.id } });

@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { createUser, getUserData, setSignIn } from '@/app/store/actions';
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function Copyright(props: { sx: object }) {
   return (

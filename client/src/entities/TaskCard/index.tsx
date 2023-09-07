@@ -14,7 +14,10 @@ export default function TaskCard({ task }: TaskCardProps) {
     <div className={styles.card}>
       <Stack>
         <Group position="apart">
-          <Title order={2}>{task.name}</Title>
+          <Title order={3}>
+            {task.name}
+            {task.userTask && task.userTask.state === 'COMPLETED' ? ' - Выполнено' : ''}
+          </Title>
           <Rank rank={task.rank}></Rank>
         </Group>
         <Group position="apart">

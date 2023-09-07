@@ -1,5 +1,4 @@
 import { Select } from '@mantine/core';
-import { CircularProgress } from '@mui/material';
 import './index.scss';
 import useGetLanguages from './hooks/useGetLanguages';
 

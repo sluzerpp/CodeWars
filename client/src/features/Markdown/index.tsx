@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './index.module.scss';
-import { Button, Group, Stack, Tabs } from '@mantine/core';
+import { Button, Group, Stack } from '@mantine/core';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { EditorMarkdown } from '@/shared/ui/EditorMarkdown';
 

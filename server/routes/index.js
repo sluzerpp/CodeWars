@@ -10,8 +10,8 @@ const langController = require('../Controllers/langController');
 
 router.use('/user', userRouter);
 router.get('/languages', authMiddleware(), langController.getAll);
-router.use('/run', authMiddleware(), runRouter);
-router.use('/discipline', authMiddleware(['ADMIN']), disciplineRouter);
+router.use('/run', runRouter);
+router.use('/discipline', disciplineRouter);
 router.use('/task', authMiddleware(), taskRouter);
 router.use('/rank', authMiddleware(['ADMIN']), rankRouter);
 

@@ -12,11 +12,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['https://beamish-capybara-72eefe.netlify.app', 'http://localhost:5173', '*'],
-  credentials: true,
+  origin: '*'
 }));
+app.options('*', cors({
+  origin: '*'
+}))
 
-app.use('/api', router);
+app.use('/', router);
 
 app.use(ErrorHandlingMiddleware);
 

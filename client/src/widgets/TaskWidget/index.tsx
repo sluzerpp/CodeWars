@@ -247,7 +247,7 @@ export default function CreateTaskWidget() {
         </div>
         <hr className={styles.line} />
         <Title order={3}>Результаты</Title>
-        {result && <ResultView result={result} isError={isError} isPassed={isPassed}></ResultView>}
+        <ResultView result={result} isError={isError} isPassed={isPassed}></ResultView>
         <hr className={styles.line} />
         <div className={styles.grid}>
           <div className={styles.column}>

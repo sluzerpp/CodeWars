@@ -1,7 +1,6 @@
 import { Group } from '@mantine/core';
 import useGetDisciplines from './hooks/useGetDisciplines';
 import DisciplineButton from './Button';
-import { CircularProgress } from '@mui/material';
 
 interface DisciplinesProps {
   value: number | undefined;

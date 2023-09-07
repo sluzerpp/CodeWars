@@ -1,8 +1,5 @@
 import { Select } from '@mantine/core';
-import { forwardRef, useState } from 'react';
 import useGetAllRanks from './hooks/useGetAllRanks';
-import Rank from '@/shared/ui/Rank';
-import { IRank } from '@/shared/types';
 import './index.scss';
 
 interface RanksProps {

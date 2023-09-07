@@ -90,3 +90,10 @@ export const deleteTask = (id: string | number) => async (dispatch: Dispatch) =>
   }
   dispatch(taskActions.setLoading(false));
 };
+
+export const signOut = () => (dispatch: Dispatch) => {
+  dispatch(userActions.update({}));
+  localStorage.removeItem('token');
+  dispatch(tokenActions.updateToken(''));
+  dispatch(userActions.setAuth(false));
+};

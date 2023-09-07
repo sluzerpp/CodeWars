@@ -3,7 +3,7 @@ const router = new Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const solutionController = require('../Controllers/solutionController');
 
-router.get('/:id/solution', solutionController.getAll);
+router.post('/:id/solution/get', solutionController.getAll);
 
 router.post('/:id/solution', solutionController.getUserSolution);
 

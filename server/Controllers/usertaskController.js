@@ -59,10 +59,6 @@ class UserTaskController {
     if (isNaN(taskId) || taskId < 0) {
       return next(ApiError.badRequest('Invalid taskId!'));
     }
-    const { lang } = req.body;
-    if (!lang || langController.check(lang)) {
-      return next(ApiError.badRequest('Invalid lang!'));
-    }
     const instance = 
       await Task.findOne({ where: { id: taskId }, include: [
         { model: Rank },
@@ -75,9 +71,7 @@ class UserTaskController {
       userTask = { state: 'AVAILABLE' }
     }
 
-    const solution = await Solution.findOne({ where: { userId, taskId, lang } });
-
-    res.json({ ...instance, solution  });
+    res.json({ ...instance.dataValues, userTask  });
   }
 
   async updateState(req, res, next) {
@@ -108,6 +102,10 @@ class UserTaskController {
       }
       await instance.update({ state: USERTASK_STATE.Completed })
       await solutionController.create(code, lang, taskId, userId);
+      const user = await User.findByPk(userId);
+      const task = await Task.findByPk(taskId);
+      const rank = await Rank.findByPk(task.rankId);
+      await user.update({ exp: user.exp + rank.expReward })
       return res.json({ result, completed: true })
     } catch (error) {
       console.error(error);

@@ -1,12 +1,12 @@
 import {
   ICode,
-  ICreateRankData,
   ICreateTaskData,
   IDiscipline,
   IJSTestResult,
   IRank,
   IRegData,
   ISolution,
+  ISubmitSolution,
   ITask,
   ITestResult,
   ITokenResponse,
@@ -66,12 +66,12 @@ export const fetchCreateTask = async (props: ICreateTaskData) => {
 };
 
 export const fetchGetOneTask = async (id: number) => {
-  const response = await $authHost.get<ITask>(`/task/${id}`);
+  const response = await $authHost.get<ITask>(`/user/task/${id}`);
   return response.data;
 };
 
 export const fetchGetAllTasks = async () => {
-  const response = await $authHost.get<ITask[]>('/task');
+  const response = await $authHost.get<ITask[]>('/user/task');
   return response.data;
 };
 
@@ -85,8 +85,8 @@ export const fetchDeleteTask = async (id: number | string) => {
   return response.data;
 };
 
-export const fetchGetAllSolution = async (id: number) => {
-  const response = await $authHost.get<ISolution[]>(`/task/${id}/solution`);
+export const fetchGetAllSolution = async (id: number, lang: string) => {
+  const response = await $authHost.post<ISolution[]>(`/task/${id}/solution/get`, { lang });
   return response.data;
 };
 
@@ -200,6 +200,14 @@ export const fetchDeleteCode = async (taskId: number | string, lang: string) => 
 };
 
 export const fetchGetSolution = async (taskId: number | string, lang: string) => {
-  const response = await $authHost.post<ISolution>(`/task/${taskId}/solution`, lang);
+  const response = await $authHost.post<ISolution>(`/task/${taskId}/solution`, { lang });
+  return response.data;
+};
+
+export const fetchCompleteTask = async (taskId: number | string, code: string, lang: string) => {
+  const response = await $authHost.put<ISubmitSolution>(`/user/task/${taskId}/`, {
+    code,
+    lang,
+  });
   return response.data;
 };

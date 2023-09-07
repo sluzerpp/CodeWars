@@ -12,6 +12,8 @@ interface LanguagesProps {
 export default function TaskLanguages({ value, setValue, onLangChange, taskId }: LanguagesProps) {
   const [isLoading, languages] = useGetLanguages(taskId);
 
+  console.log(languages);
+
   const onChange = (val: string | null) => {
     setValue(val);
     onLangChange(val);

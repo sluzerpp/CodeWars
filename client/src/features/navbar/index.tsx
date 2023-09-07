@@ -21,9 +21,9 @@ export default function NavigationBar() {
             <NavLink to={'/admin/rank'}>Ранги</NavLink>
           </>
         )}
-        {(user.role === USER_ROLES.moderator || user.role === USER_ROLES.admin) && (
+        {/* {(user.role === USER_ROLES.moderator || user.role === USER_ROLES.admin) && (
           <NavLink to={'/admin/moderation'}>Модерирование</NavLink>
-        )}
+        )} */}
       </Stack>
     </Navbar>
   );

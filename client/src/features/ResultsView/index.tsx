@@ -17,7 +17,7 @@ const isJSResult = (result: IJSTestResult | ITestResult): result is IJSTestResul
 
 export default function ResultView({ result, isError, isPassed }: ResultViewProps) {
   let resultElem = <span>...</span>;
-  if (result) {
+  if (result && !isError) {
     if (isJSResult(result)) {
       resultElem = (
         <Accordion>

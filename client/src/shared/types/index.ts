@@ -5,7 +5,7 @@ export interface IUser {
   role: string;
   exp: number;
   status: string;
-  rank: string;
+  rank: IRank;
 }
 
 export interface IRegData {

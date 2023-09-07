@@ -7,45 +7,19 @@ const imageName = 'js-ts-test';
 
 class TSContainer extends Container {
   constructor(docker, number) {
-    super();
-    this.docker = docker;
+    super(docker);
     this.name = `ts-container-${number}`;
     this.dirPath = path.resolve(TS_DATA_PATH, this.name);
     this.codePath = path.resolve(this.dirPath, 'code');
   }
   
+  // TODO - Redo method
   createDirs() {
-    this._clearFiles();
-    try {
-      fs.mkdirSync(TS_DATA_PATH);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(this.dirPath);
-    } catch (error) {}
-    try {
-      fs.mkdirSync(path.resolve(this.codePath));
-    } catch (error) {}
+    this._createDirs(TS_DATA_PATH, this.dirPath, this.codePath);
   }
 
   async createContainer() {
-    try {
-      this.container = await this.docker.createContainer({
-        Image: imageName,
-        name: this.name,
-        Tty: true,
-        Cmd: ['/bin/bash'],
-        HostConfig: {
-          Binds: [`${this.dirPath}:/data`]
-        },
-      });
-      console.log(`Контейнер ${this.name} успешно создан!`)
-    } catch (error) {
-      this.container = this.docker.getContainer(this.name)
-      await this.deleteContainer().finally(async () => {
-        await this.createContainer();
-      });
-      
-    }
+    this._createContainer(imageName, this.dirPath);
   }
 
   getResult() {
@@ -60,13 +34,13 @@ class TSContainer extends Container {
       try {
         const dataJSON = fs.readFileSync(`${this.dirPath}/results.json`);
         const results = JSON.parse(dataJSON);
-        const refactorResults = {
+        const transformedResults = {
           totalDuration: results.stats.duration / 1000,
           totalPassed: results.stats.passes,
           totalFailed: results.stats.failures,
           suites: results.results[0].suites,
         }
-        return refactorResults;
+        return transformedResults;
       } catch (error) {
         console.log('Файл results.json не найден!');
         const buff = fs.readFileSync(path.resolve(this.dirPath, 'log.txt'));
@@ -123,17 +97,6 @@ class TSContainer extends Container {
       AttachStderr: true,
     });
     await this.createOnEndPromise(exec);
-  }
-
-  _clearFiles() {
-    try {
-      if (fs.existsSync(this.dirPath)) {
-        fs.rmSync(this.dirPath, { recursive: true });
-      }
-    } catch (error) {
-      return this._clearFiles();
-    }
-    console.log(`Директория ${this.name} успешно очищена!`);
   }
 
   async testCode(code, test) {

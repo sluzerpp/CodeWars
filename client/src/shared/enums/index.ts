@@ -1,5 +1,3 @@
-import { fetchRunCodeCSharp, fetchRunCodeJS, fetchRunCodeJava, fetchRunCodeTS } from '@/app/api';
-
 export enum LANGUAGES {
   js = 'JAVASCRIPT',
   ts = 'TYPESCRIPT',
