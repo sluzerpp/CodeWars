@@ -37,8 +37,11 @@ $ npm install
 
 ```
 
-Then start Docker, install images from [archive](https://drive.google.com/file/d/1p0RwC9Xf5BnBQG4E3hsYGfOMHPcaAn5l/view?usp=drive_link)
-When Docker is started then start client and server app
+Then start Docker and install images from [archive](https://drive.google.com/file/d/1p0RwC9Xf5BnBQG4E3hsYGfOMHPcaAn5l/view?usp=drive_link).
+1. Unzip archive
+2. Open the console
+3. Write this command for each image `docker load < path/to/container-name.tar`
+Start client and server app
 
 ```bash
 # Go into client folder and start the app
