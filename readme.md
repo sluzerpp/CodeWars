@@ -22,16 +22,35 @@ Each individual language is implemented as a docker container on the server side
 - Sequelize for database manipulation
 - SQLite3
 - Dockerode for docker manipulation
-## How run locally
-To clone and run this application, you'll need Git and Node.js (which comes with npm) installed on your computer. From your command line:
+## How run locally 
+
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) and [Docker](https://www.docker.com) installed on your computer. From your command line:
+
 ```bash
 # Clone this repository
-$ git clone https://github.com/sluzerpp/Startup_Summer
+$ git clone https://github.com/sluzerpp/CodeWars
 
-# Go into the repository and install dependencies
+# Go into the repository to client folder and install dependencies
 $ npm install
 
-# Start the project
-$ npm run dev
+# Do also into server folder
 
 ```
+
+Then start Docker, install images from [archive](https://drive.google.com/file/d/1p0RwC9Xf5BnBQG4E3hsYGfOMHPcaAn5l/view?usp=drive_link)
+When Docker is started then start client and server app
+
+```bash
+# Go into client folder and start the app
+npm run dev
+
+#Go into server folder and start the app
+npm run dev
+```
+## More Screenshots
+![image](https://github.com/sluzerpp/CodeWars/assets/75631223/5d0891a9-7e71-439a-96f4-a87b4024093f)
+![image](https://github.com/sluzerpp/CodeWars/assets/75631223/45f135ec-4340-47dc-9d59-7d193c4de4ae)
+![image](https://github.com/sluzerpp/CodeWars/assets/75631223/a7dc884b-1f88-4658-bb8e-69f7a57cef8b)
+
+
+
